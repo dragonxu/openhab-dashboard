@@ -1,0 +1,33 @@
+/* HVAC Devices */
+Group gHVAC
+Group gHVACUp
+
+String HVAC_Up_Dashboard (gDashboard)
+
+Number HVAC_Up_HeatSetPoint "Heat Set [%.0f F]" <temperature> (gHVAC,gHVACUp) {zwave="17:command=thermostat_setpoint,setpoint_type=1,setpoint_scale=1,refresh_interval=20" }
+Number HVAC_Up_CoolSetPoint "Cool Set [%.0f F]" <temperature> (gHVAC,gHVACUp) {zwave="17:command=thermostat_setpoint,setpoint_type=2,setpoint_scale=1,refresh_interval=20" }
+
+Number HVAC_Up_Temperature "Temperature [%.1f F]" <temperature> (gHVAC,gHVACUp,gDashboard) {zwave="17:1:command=sensor_multilevel,sensor_type=1,refresh_interval=60" }
+Number HVAC_Up_Humidity "Rel Humidity [%.1f %%]" <temperature> (gHVAC,gHVACUp) {zwave="17:2:command=sensor_multilevel,sensor_type=5,refresh_interval=60" }
+Number HVAC_Up_Mode "Mode [MAP(thermostatMode.map):%d]" (gHVAC,gHVACUp) {zwave="17:command=thermostat_mode" }
+
+Number HVAC_Up_Fan_Mode "Fan Mode [MAP(thermostatFanMode.map):%d]" (gHVAC,gHVACUp) {zwave="17:command=thermostat_fan_mode" }
+Number HVAC_Up_Operating_State "Op State [MAP(thermostatOpState.map):%d]" (gHVAC,gHVACUp,gDashboard) {zwave="17:command=thermostat_operating_state,refresh_interval=60" }
+Number HVAC_Up_Fan_State "Fan State [MAP(thermostatFanState.map):%d]" (gHVAC,gHVACUp) {zwave="17:command=thermostat_fan_state,refresh_interval=60" }
+Number HVAC_Up_Battery "Battery State [%d %%]" (gHVAC,gHVACUp) {zwave="17:command=BATTERY"}
+
+Group gHVACDown
+
+String HVAC_Down_Dashboard (gDashboard)
+
+Number HVAC_Down_HeatSetPoint "Heat Set [%.0f F]" <temperature> (gHVAC,gHVACDown) {zwave="18:command=thermostat_setpoint,setpoint_type=1,setpoint_scale=1,refresh_interval=20"}
+Number HVAC_Down_CoolSetPoint "Cool Set [%.0f F]" <temperature> (gHVAC,gHVACDown) {zwave="18:command=thermostat_setpoint,setpoint_type=2,setpoint_scale=1,refresh_interval=20"}
+
+Number HVAC_Down_Temperature "Temperature [%.1f F]" <temperature> (gHVAC,gHVACDown,gDashboard) {zwave="18:1:command=sensor_multilevel,sensor_type=1,refresh_interval=60"}
+Number HVAC_Down_Humidity "Rel Humidity [%.1f %%]" <temperature> (gHVAC,gHVACDown) {zwave="18:2:command=sensor_multilevel,sensor_type=5,refresh_interval=60"}
+Number HVAC_Down_Mode "Mode [MAP(thermostatMode.map):%d]" (gHVAC,gHVACDown) {zwave="18:command=thermostat_mode"}
+
+Number HVAC_Down_Fan_Mode "Fan Mode [MAP(thermostatFanMode.map):%d]" (gHVAC,gHVACDown) {zwave="18:command=thermostat_fan_mode"}
+Number HVAC_Down_Operating_State "Op State [MAP(thermostatOpState.map):%d]" (gHVAC,gHVACDown,gDashboard) {zwave="18:command=thermostat_operating_state,refresh_interval=60"}
+Number HVAC_Down_Fan_State "Fan State [MAP(thermostatFanState.map):%d]" (gHVAC,gHVACDown) {zwave="18:command=thermostat_fan_state,refresh_interval=60"}
+Number HVAC_Down_Battery "Battery State [%d %%]" (gHVAC,gHVACDown) {zwave="18:command=BATTERY"}
