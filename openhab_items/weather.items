@@ -1,0 +1,25 @@
+/*Weather */
+Group	Weather	(All,gDashboard)	
+Group	Weather_Chart	""	(Weather_Chart)	
+Number	Weather_Chart_Period	"Chart Period"	(Weather_Chart)	
+Number	Weather_Temperature	"Temperature [%.2f °F]"	<KNXUF_temp_temperature>	(All, Weather, Weather_Chart)		{ weather="locationId=home, type=temperature, property=current, scale=1, unit=fahrenheit" }
+String	Weather_Conditions	"Conditions [%s]"	(All, Weather)		{ weather="locationId=home, type=condition, property=text" }
+String	Weather_Code	"Weather Common ID [%s]"	(All, Weather)		{ weather="locationId=home, type=condition, property=commonId" }
+String	Weather_Code_1	"Tomorrow's Weather Common ID [%s]"	(All, Weather)		{ weather="locationId=home, type=condition, forecast=1, property=commonId" }
+Number	Weather_Humidity	"Humidity [%d %%]"	(All, Weather) { weather="locationId=home, type=athmosphere, property=humidity, scale=1" }
+Number	Weather_Temp_Max_0	"Today's highest temperature [%.1f °F]"	(All, Weather,Weather_Chart)		{ weather="locationId=home, forecast=0, type=temperature, property=max, scale=1, unit=fahrenheit" }
+Number	Weather_Temp_Max_1	"Temperature max tomorrow [%.1f °F]" (All, Weather)	{ weather="locationId=home, forecast=1, type=temperature, property=max, scale=1, unit=fahrenheit" }
+Number	Weather_Temp_Max_2	"Temperature max day after [%.1f °F]" (All, Weather)	{ weather="locationId=home, forecast=2, type=temperature, property=max, scale=1, unit=fahrenheit" }
+Number	Weather_Temp_Min_0	"Today's lowest temperature [%.1f °F] " (All, Weather,Weather_Chart)		{ weather="locationId=home, forecast=0, type=temperature, property=min, scale=1, unit=fahrenheit" }
+Number	Weather_Temp_Min_1	"Temperature min tomorrow [%.1f °F]" (All, Weather)	{ weather="locationId=home, forecast=1, type=temperature, property=min, scale=1, unit=fahrenheit" }
+Number	Weather_Temp_Min_2	"Temperature min day after [%.1f °F]" (All, Weather)	{ weather="locationId=home, forecast=2, type=temperature, property=min, scale=1, unit=fahrenheit" }
+Number	Weather_Pressure	"Pressure [%.2f mb]"	(All, Weather)		{ weather="locationId=home, type=athmosphere, property=pressure, scale=1" }
+Number  Weather_Precipitation   "Precip probability [%d %%]" (All, Weather)  {weather="locationId=home, type=precipitation, property=probability"}
+Number  Weather_Precipitation_1   "Precip probability [%d %%]" (All, Weather)  {weather="locationId=home, type=precipitation, forecast=1, property=probability"}
+Number  Weather_Temperature_Feels   "Temperature feel [%.2f °F]" (All, Weather) {weather="locationId=home, type=temperature, property=feel, unit=fahrenheit"}
+Number  Weather_Wind_Chill           "Wind chill [%.2f °F]"   (All, Weather)  {weather="locationId=home, type=wind, property=chill, unit=fahrenheit"}
+Number  Weather_Wind_Speed       "Windspeed [%.2f mph]"    (All, Weather) {weather="locationId=home, type=wind, property=speed, unit=mph"}
+String  Weather_Wind_Direction       "Wind direction [%s]"  (All, Weather)    {weather="locationId=home, type=wind, property=direction"}
+Number  Weather_Wind_Gust        "Wind gust [%.2f mph]"  (All, Weather)   {weather="locationId=home, type=wind, property=gust, unit=mph"}
+DateTime	Weather_ObsTime	"Observation time  [%1$tm/%1$td/%1$tY %1$tH:%1$tM]" (All, Weather)	{ weather="locationId=home, type=condition, property=observationTime" }
+DateTime	Weather_LastUpdate	"Weather last updated [%1$tm/%1$td/%1$tY %1$tH:%1$tM]" (All, Weather)	{ weather="locationId=home, type=condition, property=observationTime" }
