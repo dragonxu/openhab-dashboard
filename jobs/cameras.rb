@@ -19,19 +19,19 @@ require 'net/http'
 @newFile2 = "assets/images/cameras/snapshot2_new.jpeg"
 @oldFile2 = "assets/images/cameras/snapshot2_old.jpeg"
 
-@camera3Host = "172.16.3.202"  ## CHANGE
-@camera3Port = "80"  ## CHANGE
-@camera3Username = 'xxxx' ## CHANGE
-@camera3Password = 'xxxx' ## CHANGE
-@camera3URL = "/Streaming/channels/1/picture"
+@camera3Host = "127.0.0.1"  ## CHANGE
+@camera3Port = "2280"  ## CHANGE
+@camera3Username = 'None' ## CHANGE
+@camera3Password = '' ## CHANGE
+@camera3URL = "/chart?groups=gSprinkler&period=3D"
 @newFile3 = "assets/images/cameras/snapshot3_new.jpeg"
 @oldFile3 = "assets/images/cameras/snapshot3_old.jpeg"
 
-@camera4Host = "cctv_server"  ## CHANGE
-@camera4Port = "80"  ## CHANGE
+@camera4Host = "127.0.0.1"  ## CHANGE
+@camera4Port = "2280"  ## CHANGE
 @camera4Username = 'None' ## CHANGE
 @camera4Password = '' ## CHANGE
-@camera4URL = "/mobile/channel03.jpg"
+@camera4URL = "/chart?items=PowerMeterLastIntervalAverage&period=D"
 @newFile4 = "assets/images/cameras/snapshot4_new.jpeg"
 @oldFile4 = "assets/images/cameras/snapshot4_old.jpeg"
 
@@ -69,9 +69,9 @@ SCHEDULER.every @fetchNewImageEvery, first_in: 0 do
 	new_file2 = fetch_image(@camera2Host,@oldFile2,@newFile2,@camera2Port,@camera2Username,@camera2Password,@camera2URL)
 	new_file3 = fetch_image(@camera3Host,@oldFile3,@newFile3,@camera3Port,@camera3Username,@camera3Password,@camera3URL)
 	new_file4 = fetch_image(@camera4Host,@oldFile4,@newFile4,@camera4Port,@camera4Username,@camera4Password,@camera4URL)
-	new_file5 = fetch_image(@camera5Host,@oldFile5,@newFile5,@camera5Port,@camera5Username,@camera5Password,@camera5URL)
+#	new_file5 = fetch_image(@camera5Host,@oldFile5,@newFile5,@camera5Port,@camera5Username,@camera5Password,@camera5URL)
 
-	if not File.exists?(@newFile1 && @newFile2 && @newFile3)
+	if not File.exists?(@newFile1 && @newFile2 && @newFile3 && @newFile4)
 		warn "Failed to Get Camera Images"
 	end
  
@@ -79,12 +79,12 @@ SCHEDULER.every @fetchNewImageEvery, first_in: 0 do
 	send_event('camera2', image: make_web_friendly(@oldFile2))
 	send_event('camera3', image: make_web_friendly(@oldFile3))
 	send_event('camera4', image: make_web_friendly(@oldFile4))
-	send_event('camera5', image: make_web_friendly(@oldFile5))
+#	send_event('camera5', image: make_web_friendly(@oldFile5))
 	sleep(@cameraDelay)
 	send_event('camera1', image: make_web_friendly(new_file1))
 	send_event('camera2', image: make_web_friendly(new_file2))
 	send_event('camera3', image: make_web_friendly(new_file3))
 	send_event('camera4', image: make_web_friendly(new_file4))
-	send_event('camera5', image: make_web_friendly(new_file5))
-	send_event('camTest', image: make_web_friendly(new_file5))
+#	send_event('camera5', image: make_web_friendly(new_file5))
+#	send_event('camTest', image: make_web_friendly(new_file5))
 end
