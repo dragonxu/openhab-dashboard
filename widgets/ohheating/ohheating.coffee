@@ -7,10 +7,12 @@ class Dashing.Ohheating extends Dashing.Widget
     get: -> @_state ? "Unknown"
     set: (key, value) -> 
       @_state = value
+      
 
-  #    jsonInner = JSON.parse @get('state')
-  #     @set 'temperature', jsonInner.temperature
-  #     @set 'target', jsonInner.target       
+  @accessor 'mode',
+    get: -> @_mode ? 'Off'
+    set: (key, value) -> 
+      @_mode = value
 
   @accessor 'temperature',
     get: -> if @_temperature then parseFloat(@_temperature).toFixed(1) else 0
@@ -22,16 +24,32 @@ class Dashing.Ohheating extends Dashing.Widget
     set: (key, value) -> 
       @_target = value
 
-  @accessor 'target-style', ->
-    if @get('temperature') == @get('target')
-      console.log "style: steady"
-      'heating-steady'       
-    else if @get('temperature') < @get('target') 
-      console.log "style: on"
-      'heating-on' 
+  @accessor 'hvacstate',
+    get: -> @_hvacstate ? 'Off'
+    set: (key, value) -> 
+      @_hvacstate = value
+
+  @accessor 'hvacmode-style', ->
+    if @get('mode') == "Heating"
+      console.log "style: current-heat"
+      'current-heat'       
+    else if @get('mode') == "Cooling" 
+      console.log "style: current-cool"
+      'current-cool' 
     else
-      console.log "style: off"
-      'heating-off'
+      console.log "style: current-off"
+      'current-off'
+
+  @accessor 'hvacstate-style', ->
+    if @get('hvacstate') == "Heating"
+      console.log "style: opheat"
+      'heating-opheat'       
+    else if @get('hvacstate') == "Cooling" 
+      console.log "style: opcool"
+      'heating-opcool' 
+    else
+      console.log "style: opoff"
+      'heating-opoff'
       
   queryState: ->
     $.get '/openhab/dispatch',
@@ -43,9 +61,11 @@ class Dashing.Ohheating extends Dashing.Widget
         @set 'state', json.state
 
         jsonInner = JSON.parse json.state
+        @set 'mode', jsonInner.mode
         @set 'temperature', jsonInner.temperature
         @set 'target', jsonInner.target
-        console.log 'temperature: ', jsonInner.temperature, ', target: ', jsonInner.target
+        @set 'hvacstate', jsonInner.hvacstate
+        console.log 'mode: ', jsonInner.mode, 'temperature: ', jsonInner.temperature, ' target: ', jsonInner.target, 'hvacstate: ', jsonInner.hvacstate
         console.log json, ' Inner: ', jsonInner
 
   ready: ->
@@ -56,6 +76,8 @@ class Dashing.Ohheating extends Dashing.Widget
     json = JSON.parse data
     @set 'state', json.state
     jsonInner = JSON.parse json.state
-    @set 'temperature', jsonInner.temperature
+    @set 'mode', jsonInner.mode
     @set 'target', jsonInner.target
-  	console.log "temperature: ", @get('temperature'),", target: ", @get('target')
+    @set 'temperature', jsonInner.temperature
+    @set 'hvacstate', jsonInner.hvacstate
+    console.log "mode: ", @get('mode'), "temperature: ", @get('temperature'), " target: ", @get('target'), " hvacstate: ", @get('hvacstate')

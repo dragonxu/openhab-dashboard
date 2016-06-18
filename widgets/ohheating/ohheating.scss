@@ -5,13 +5,26 @@
   .title {
     color: #fff;
   }
-  .current {
+  .current-cool {
   	color: #00aaff;
     display: inline-block;
     vertical-align: middle;
     font-size: 350%;
   }
-  .heating-off {
+  .current-heat {
+  	color: #eb0033;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 350%;
+  }
+  .current-off {
+  	color: #bbbbbb;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 350%;
+  }
+
+  .heating-opheat {
   	color: #fff;
   	background: #590000;
     //display: inline-block;
@@ -21,9 +34,9 @@
     width: 100%;
     font-size: 150%;
   }
-  .heating-steady {
+  .heating-opoff {
   	color: #fff;
-  	background: #75CEEB;
+  	background: #aaa;
     //display: inline-block;
     position: absolute;
     bottom: 0;
@@ -31,9 +44,9 @@
     width: 100%;
     font-size: 150%;
   }
-  .heating-on {
+  .heating-opcool {
   	color: #000;
-  	background: #93EB75;
+  	background: #00aaff;
     //display: inline-block;
     position: absolute;
     bottom: 0;
@@ -43,7 +56,7 @@
   }
 
   .unit_temperature {
-    color: #00aaff;
+    color: #fff;
     font-size: 120%;
     font-weight: 400;
     display: inline-block;
