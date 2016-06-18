@@ -1,0 +1,34 @@
+// ----------------------------------------------------------------------------
+// Widget-ohpowersmall styles
+// ----------------------------------------------------------------------------
+.widget-ohpowersmall {
+
+  .title {
+    color: #fff;
+  }
+
+  .powersmall-low {
+  	color: #00aa22;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 300%;
+  }
+  .powersmall-med {
+  	color: #bbbbbb;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 300%;
+  }
+  .powersmall-high {
+  	color: #aa2222;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 300%;
+  }
+  .unit {
+    color: #fff;
+    font-size: 150%;
+    display: inline-block;
+    vertical-align: bottom;
+  }
+}

@@ -1,0 +1,22 @@
+// ----------------------------------------------------------------------------
+// Widget-ohkwh styles
+// ----------------------------------------------------------------------------
+.widget-ohkwh {
+
+  .title {
+    color: #fff;
+  }
+
+  .value {
+    color: #aa2222;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 300%;
+  }
+  .unit {
+    color: #aa2222;
+    font-size: 150%;
+    display: inline-block;
+    vertical-align: bottom;
+  }
+}

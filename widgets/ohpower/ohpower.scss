@@ -1,0 +1,34 @@
+// ----------------------------------------------------------------------------
+// Widget-ohpower styles
+// ----------------------------------------------------------------------------
+.widget-ohpower {
+
+  .title {
+    color: #fff;
+  }
+
+  .power-low {
+  	color: #00aa22;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 300%;
+  }
+  .power-med {
+  	color: #bbbbbb;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 300%;
+  }
+  .power-high {
+  	color: #aa2222;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 300%;
+  }
+  .unit {
+    color: #fff;
+    //display: inline-block;
+    vertical-align: bottom;
+	font-size: 150%;
+  }
+}
