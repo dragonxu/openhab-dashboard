@@ -43,14 +43,66 @@ then
 	lock.unlock()
 end
 
-rule "Central Heating Dashboard widget update"
+rule "HVAC Up Dashboard widget update"
 when
-	Item CH_Indoor_Temp received update or
-	Item CH_Target_Temp received update
+	Item HVAC_Up_HeatSetPoint received update or
+	Item HVAC_Up_CoolSetPoint received update or
+	Item HVAC_Up_Operating_State received update or
+	Item HVAC_Up_Temperature received update or
+	Item HVAC_Up_Mode received update
 then
 	//Need to ensure that the new status string is a valid json, as otherwise when dashing gets the state property directly, it will fail
-	
+	var String status = null
+	var String opstate = null
 	//logInfo("Dashboard","Updating heating status Dashboard widget")
-	var String status = '{"temperature" : ' + CH_Indoor_Temp.state.toString + ', "target" : ' + CH_Target_Temp.state.toString  + '}'
-	postUpdate(CH_Dashboard,status)
+	
+	if (HVAC_Up_Operating_State.state == 1){
+		opstate = "Heating"
+	} else if(HVAC_Up_Operating_State.state == 2) {
+		opstate = "Cooling"
+	} else {
+		opstate = "Off"
+	}
+	// mappings=[0="Off",1="Heating",2="Cooling"]
+	if (HVAC_Up_Mode.state == 1){
+		status = '{"mode" : "Heating", "temperature" : ' + HVAC_Up_Temperature.state.toString + ', "target" : ' + HVAC_Up_HeatSetPoint.state.toString  + ', "hvacstate" : "' + opstate  + '"}'
+	} else if(HVAC_Up_Mode.state == 2) {
+		status = '{"mode" : "Cooling", "temperature" : ' + HVAC_Up_Temperature.state.toString + ', "target" : ' + HVAC_Up_CoolSetPoint.state.toString  + ', "hvacstate" : "' + opstate  + '"}'
+	}else {
+		status = '{"mode" : "Off", "temperature" : ' + HVAC_Up_Temperature.state.toString + ', "target" : ' + HVAC_Up_Temperature.state.toString  + ', "hvacstate" : "' + opstate  + '"}'
+	}
+	
+	postUpdate(HVAC_Up_Dashboard,status)
+end
+
+rule "HVAC Down Dashboard widget update"
+when
+	Item HVAC_Down_HeatSetPoint received update or
+	Item HVAC_Down_CoolSetPoint received update or
+	Item HVAC_Down_Temperature received update or
+	Item HVAC_Down_Mode received update or
+	Item HVAC_Down_Operating_State received update
+then
+	//Need to ensure that the new status string is a valid json, as otherwise when dashing gets the state property directly, it will fail
+	var String status = null
+	var String opstate = null
+	//logInfo("Dashboard","Updating heating status Dashboard widget")
+	
+	if (HVAC_Down_Operating_State.state == 1){
+		opstate = "Heating"
+	} else if(HVAC_Down_Operating_State.state == 2) {
+		opstate = "Cooling"
+	} else {
+		opstate = "Off"
+	}
+	// mappings=[0="Off",1="Heating",2="Cooling"]
+	if (HVAC_Down_Mode.state == 1){
+		status = '{"mode" : "Heating", "temperature" : ' + HVAC_Down_Temperature.state.toString + ', "target" : ' + HVAC_Down_HeatSetPoint.state.toString  + ', "hvacstate" : "' + opstate  + '"}'
+	} else if(HVAC_Down_Mode.state == 2) {
+		status = '{"mode" : "Cooling", "temperature" : ' + HVAC_Down_Temperature.state.toString + ', "target" : ' + HVAC_Down_CoolSetPoint.state.toString  + ', "hvacstate" : "' + opstate  + '"}'
+	}else {
+		status = '{"mode" : "Off", "temperature" : ' + HVAC_Down_Temperature.state.toString + ', "target" : ' + HVAC_Down_Temperature.state.toString  + ', "hvacstate" : "' + opstate  + '"}'
+	}
+	
+	postUpdate(HVAC_Down_Dashboard,status)
 end
